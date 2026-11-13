@@ -1,0 +1,42 @@
+
+# Student Grading System
+
+print("===================================")
+print("       STUDENT GRADING SYSTEM")
+print("===================================")
+
+# Get student details
+name = input("Enter student name: ")
+roll_no = input("Enter roll number: ")
+
+# Enter marks
+mark1 = float(input("Enter marks in Subject 1: "))
+mark2 = float(input("Enter marks in Subject 2: "))
+mark3 = float(input("Enter marks in Subject 3: "))
+
+# Calculate total and percentage
+total = mark1 + mark2 + mark3
+percentage = total / 3
+
+# Calculate grade
+if percentage >= 90:
+    grade = "A+"
+elif percentage >= 80:
+    grade = "A"
+elif percentage >= 70:
+    grade = "B"
+elif percentage >= 60:
+    grade = "C"
+elif percentage >= 50:
+    grade = "D"
+else:
+    grade = "F"
+
+# Display result
+print("\n========== STUDENT RESULT ==========")
+print("Student Name:", name)
+print("Roll Number:", roll_no)
+print("Total Marks:", total, "/ 300")
+print("Percentage:", round(percentage, 2), "%")
+print("Grade:", grade)
+print("====================================")
