@@ -1,0 +1,65 @@
+
+# CSV-Based Payroll Management System
+
+import csv
+import os
+
+filename = "payroll.csv"
+
+while True:
+    print("\n===================================")
+    print("      PAYROLL MANAGEMENT SYSTEM")
+    print("===================================")
+    print("1. Add Employee")
+    print("2. View Payroll")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        emp_id = input("Enter Employee ID: ")
+        name = input("Enter Employee Name: ")
+        basic = float(input("Enter Basic Salary: "))
+        bonus = float(input("Enter Bonus: "))
+        deduction = float(input("Enter Deduction: "))
+
+        net_salary = basic + bonus - deduction
+
+        file_exists = os.path.exists(filename)
+
+        with open(filename, "a", newline="") as file:
+            writer = csv.writer(file)
+
+            if not file_exists:
+                writer.writerow([
+                    "Employee ID", "Name", "Basic Salary",
+                    "Bonus", "Deduction", "Net Salary"
+                ])
+
+            writer.writerow([
+                emp_id, name, basic, bonus,
+                deduction, net_salary
+            ])
+
+        print("\nEmployee payroll added successfully!")
+        print("Net Salary:", net_salary)
+
+    elif choice == "2":
+        if os.path.exists(filename):
+            with open(filename, "r") as file:
+                reader = csv.reader(file)
+
+                print("\n========== PAYROLL RECORDS ==========")
+
+                for row in reader:
+                    print(" | ".join(row))
+
+        else:
+            print("No payroll records found!")
+
+    elif choice == "3":
+        print("Thank you for using Payroll Management System!")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
