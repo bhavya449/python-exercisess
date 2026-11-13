@@ -1,0 +1,51 @@
+
+# Student Data Manager using Files
+
+filename = "students.txt"
+
+while True:
+    print("\n===================================")
+    print("       STUDENT DATA MANAGER")
+    print("===================================")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        name = input("Enter student name: ")
+        roll = input("Enter roll number: ")
+        marks = input("Enter marks: ")
+
+        with open(filename, "a") as file:
+            file.write(name + "," + roll + "," + marks + "\n")
+
+        print("Student record added successfully!")
+
+    elif choice == "2":
+        try:
+            with open(filename, "r") as file:
+                records = file.readlines()
+
+            print("\n========== STUDENT RECORDS ==========")
+
+            if len(records) == 0:
+                print("No student records found.")
+            else:
+                for record in records:
+                    data = record.strip().split(",")
+                    print("Name:", data[0])
+                    print("Roll Number:", data[1])
+                    print("Marks:", data[2])
+                    print("--------------------------------")
+
+        except FileNotFoundError:
+            print("No student records found.")
+
+    elif choice == "3":
+        print("Thank you for using Student Data Manager!")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
